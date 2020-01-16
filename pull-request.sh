@@ -87,7 +87,7 @@ create_pull_request() {
         echo "Created PR NUMBER: $PR_NUMBER"
         if [ -n "$PULL_REQUEST_ASSIGNEE" ]; then
           echo "Assiging: ${PULL_REQUEST_ASSIGNEE}"
-          DATA="{\"assignees\":[${PULL_REQUEST_ASSIGNEE}]"
+          DATA="{\"assignees\":[\"${PULL_REQUEST_ASSIGNEE}\"]"
           curl -sSL -H "${AUTH_HEADER}" -H "${HEADER}" --user "${GITHUB_ACTOR}" -X POST --data "${DATA}" "${ISSUE_URL}/${PR_NUMBER}"
         else
           echo "PULL_REQUEST_ASSIGNEE is not set"
