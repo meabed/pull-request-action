@@ -50,13 +50,17 @@ create_pull_request() {
     TARGET="$(echo -n "${2}" | jq --raw-input --slurp ".")"  # pull request TO this target
     BODY="$(echo -n "${3}" | jq --raw-input --slurp ".")"    # this is the content of the message
     TITLE="$(echo -n "${4}" | jq --raw-input --slurp ".")"   # pull request title
-    MAINTAINER_CAN_MODIFY="$(echo -n "${5}" | jq --raw-input --slurp ".")"   # pull request title
 
     # JSON boolean
     if [[ "${5}" ==  "true" ]]; then                         # if PRs are draft
       DRAFT="true";
     else
       DRAFT="false";
+    fi
+    if [[ "${6}" ==  "true" ]]; then                         # if MAINTAINER_CAN_MODIFY
+      MAINTAINER_CAN_MODIFY="true";
+    else
+      MAINTAINER_CAN_MODIFY="false";
     fi
 
     # Check if the branch already has a pull request open
